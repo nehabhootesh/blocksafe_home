@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MetaMask Signature</title>
+</head>
+<body>
+  <h1>Sign Message with MetaMask</h1>
+  <form id="myForm">
+    <label for="message">Message:</label>
+    <input type="text" id="message" name="message" required>
+    <button type="submit">Sign Message</button>
+  </form>
+
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js"></script>
+  <script>
+    // Check if MetaMask is installed
+    if (typeof window.ethereum !== 'undefined') {
+      window.web3 = new Web3(window.ethereum);
+      window.ethereum.enable();
+    } else {
+      alert('Please install MetaMask to use this feature');
+    }
+
+    // Handle form submission
+    document.getElementById('myForm').addEventListener('submit', async function(event) {
+      event.preventDefault(); // Prevent form submission
+      const message = document.getElementById('message').value.trim(); // Message to sign
+      const accountAddress = '0x42Da65a216C217fa1f1062360032f2Fee45F146b'; // Your Ethereum account address
+
+      try {
+        const signature = await window.web3.eth.personal.sign(message, accountAddress, '');
+        alert('Signature: ' + signature);
+      } catch (error) {
+        console.error(error);
+        alert('An error occurred. Please check the console.');
+      }
+    });
+  </script>
+</body>
+</html>

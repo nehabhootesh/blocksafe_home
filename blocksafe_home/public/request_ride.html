@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Request Ride</title>
+  
+  <style>
+    /* Global styling */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: linear-gradient(to right, #A55EEA, #FF7675);
+    }
+
+    .nav {
+        background: linear-gradient(to right, #A55EEA, #FF7675); /* Gradient background */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 15px 0;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 10px;
+    }
+
+    .navbar a {
+        float: left;
+        display: block;
+        color: rgb(0, 0, 0);
+        text-align: center;
+        padding: 14px 20px;
+        text-decoration: none;
+        color: #fff;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .navbar a:hover {
+        background-color: #ddd;
+        color: black;
+    }
+
+    .logo {
+        color: #fff;
+        text-decoration: none;
+        font-size: 20px;
+        margin-left: 20px;
+    }
+
+    .nav-links {
+        list-style: none;
+        margin-right: 20px;
+    }
+
+    .nav-links li {
+        display: inline-block;
+        margin-left: 20px;
+    }
+
+    .nav-links li a {
+        color: #fff;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .nav-links li a:hover {
+        color: #ccc;
+    }
+
+    .container {
+        display: flex;
+        width: 80%;
+        max-width: 1200px;
+        margin-top: 300px; /* Adjust margin to center vertically */
+    }
+
+    .input-container {
+        flex: 1;
+        padding: 20px;
+        background: linear-gradient(to right, orange, purple); /* Gradient background for the left side */
+        border-top-left-radius: 10px; /* Adjust border radius to match the container's */
+        border-bottom-left-radius: 10px;
+        margin-top: 100px;
+    }
+
+    .input-container form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .input-container label {
+        margin-bottom: 10px;
+        color: #fff;
+    }
+
+    .input-container input,
+    .input-container select {
+        width: calc(100% - 20px);
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        background-color: rgba(255, 255, 255, 0.8); /* Adjust input background color */
+    }
+
+    .image-container {
+        flex: 1;
+        background-image: url('cardimg.jpg');
+        background-size: cover;
+        background-position: center;
+        border-top-right-radius: 10px; /* Adjust border radius to match the container's */
+        border-bottom-right-radius: 10px;
+        margin-top: 100px;
+    }
+
+    .submit-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    input[type="submit"] {
+        width: 100px; /* Adjust button width */
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background: linear-gradient(to right,  #A55EEA, #FF7675); /* Gradient background for the button */
+        color: #fff;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+
+    .center-button {
+        position: absolute;
+        left: 50%;
+        bottom: 20px;
+        transform: translateX(-50%);
+        background: linear-gradient(to right, orange, purple); /* Gradient background for the button */
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        color: #fff;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background: linear-gradient(to right, #9448ED, #FF6B6B);
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation bar -->
+  <nav class="nav">
+    <a href="#" class="logo">BlockSafe</a>
+    <ul class="nav-links">
+        <li><a href="/Cpage">Home</a></li>
+        <li><a href="/request_ride">Create Request</a></li>
+        <li><a href="/ride_requests">Ride Requests</a></li>
+        <li><a href="/history">Rides</a></li>
+        <li><a href="/ch_ride_st">Change ride status</a></li>
+        <li><a href="/support">Support</a></li>
+        <li><a href="/logout">Logout</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+  <div class="input-container">
+    <form action="/Request_ride" method="post">
+      <label for="from">From:</label>
+      <input type="text" id="from" name="from" required>
+      
+      <label for="to">To:</label>
+      <input type="text" id="to" name="to" required>
+      
+      <label for="time">Time of Departure:</label>
+      <input type="datetime-local" id="time" name="time" required>
+      
+      <label for="cost">Price quotation:</label>
+      <input type="number" id="cost" name="cost" required>
+
+      <label for="seat">Number of seats:</label>
+      <input type="number" id="seat" name="seat" required>
+
+      <label for="pinnedLocation_p">Pickup location:</label>
+      <input type="text" id="pinnedLocation_p" name="pinnedLocation_p" required>
+
+      <label for="pinnedLocation_d">Drop location:</label>
+      <input type="text" id="pinnedLocation_d" name="pinnedLocation_d" required>
+
+      <div class="submit-container">
+        <input type="submit" value="Submit">
+      </div>
+    </form>
+   
+  </div>
+  <div class="image-container"></div>
+</div>
+
+</body>
+</html>
+
+
+  <script>
+
+    const myDiv_p = document.getElementById('map_p');
+    const myDivs_p = document.getElementById('s_p');
+    const hideButton_p = document.getElementById('hide_p');
+
+    hideButton_p.addEventListener('click', function() {
+        if (myDiv_p.style.display !== 'none') {
+            myDiv_p.style.display = 'none';
+            myDivs_p.style.display = 'none';
+        } else {
+            myDiv_p.style.display = 'block';
+            myDivs_p.style.display = 'block';
+        }
+    });
+
+    
+    const myDiv_d = document.getElementById('map_d');
+    const myDivs_d = document.getElementById('s_d');
+    const hideButton_d = document.getElementById('hide_d');
+
+    hideButton_d.addEventListener('click', function() {
+        if (myDiv_d.style.display !== 'none') {
+            myDiv_d.style.display = 'none';
+            myDivs_d.style.display = 'none';
+        } else {
+            myDiv_d.style.display = 'block';
+            myDivs_d.style.display = 'block';
+        }
+    });
+
+
+function initMap_p() {
+    const map = L.map('map_p').setView([12.9716, 77.5946], 8); // Default center (Bangalore)
+    let marker;
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    map.on('click', function (e) {
+        if (marker) {
+            map.removeLayer(marker);
+        }
+        marker = L.marker(e.latlng).addTo(map);
+        document.getElementById("pinnedLocation_p").value = `${e.latlng.lat}, ${e.latlng.lng}`;
+    });
+
+    const search_p = document.getElementById("search_p");
+    search_p.addEventListener("submit", function (event) {
+        event.preventDefault();
+        const location = document.getElementById("location_p").value;
+        searchLocation_p(location, map);
+    });
+
+    const clearMarkerBtn_p = document.getElementById("clearMarker_p");
+    clearMarkerBtn_p.addEventListener("click", function () {
+        map.setView([12.9716, 77.5946], 8); // Reset map view to default center
+        map.removeLayer(marker);
+        document.getElementById("pinnedLocation_p").value = "--";
+    });
+}
+
+
+function initMap_d() {
+  const map_d = L.map('map_d').setView([12.9716, 77.5946], 8); // Default center (Bangalore)
+  let marker;
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map_d);
+
+  map_d.on('click', function (e) {
+      if (marker) {
+          map_d.removeLayer(marker);
+      }
+      marker = L.marker(e.latlng).addTo(map_d);
+      document.getElementById("pinnedLocation_d").value = `${e.latlng.lat}, ${e.latlng.lng}`;
+  });
+
+  const search_d = document.getElementById("search_d");
+  search_d.addEventListener("click", function (event) {
+      event.preventDefault();
+      const location = document.getElementById("location_d").value;
+      searchLocation_d(location, map_d);
+  });
+
+  const clearMarkerBtn = document.getElementById("clearMarker_d");
+  clearMarkerBtn.addEventListener("click", function () {
+      map_d.setView([12.9716, 77.5946], 8); // Reset map view to default center
+      map_d.removeLayer(marker);
+      document.getElementById("pinnedLocation_d").value = "--";
+  });
+}
+
+function searchLocation_p(location, map) {
+    fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${location}`)
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.length > 0) {
+                const { lat, lon } = data[0];
+                map.setView([parseFloat(lat), parseFloat(lon)], 12);
+                if (marker) {
+                    map.removeLayer(marker);
+                }
+                marker = L.marker([parseFloat(lat), parseFloat(lon)]).addTo(map);
+                document.getElementById("pinnedLocation_p").value = `${parseFloat(lat)}, ${parseFloat(lon)}`;
+            } else {
+                alert("Location not found.");
+            }
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+            alert("An error occurred while searching for the location.");
+        });
+}
+
+
+function searchLocation_d(location, map) {
+  fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${location}`)
+      .then((response) => response.json())
+      .then((data) => {
+          if (data.length > 0) {
+              const { lat, lon } = data[0];
+              map.setView([parseFloat(lat), parseFloat(lon)], 12);
+              if (marker) {
+                  map.removeLayer(marker);
+              }
+              marker = L.marker([parseFloat(lat), parseFloat(lon)]).addTo(map);
+              document.getElementById("pinnedLocation_d").value = `${parseFloat(lat)}, ${parseFloat(lon)}`;
+          } else {
+              alert("Location not found.");
+          }
+      })
+      .catch((error) => {
+          console.error("Error:", error);
+          alert("An error occurred while searching for the location.");
+      });
+}
+
+
+function adjustMapSize() {
+    map.invalidateSize();
+}
+
+window.addEventListener('resize', adjustMapSize);
+
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css" />
+<script>initMap_p();</script>
+<script>initMap_d();</script>
+
+</body>
+</html>

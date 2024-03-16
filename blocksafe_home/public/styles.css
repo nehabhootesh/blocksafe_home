@@ -1,0 +1,383 @@
+/* Reset CSS
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  background: url('car-pooling-using-blockchain-webbpage-background-image-with-orange-and-purple-gradient-combination-and-the-right-corner-has-to-be-empty-and-add-some-blockchain-hint-in-the-image.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 200px;
+  background: linear-gradient(to right, rgba(165, 94, 234, 0.8), rgba(255, 118, 117, 0.8)), url('car-pooling-using-blockchain-webbpage-background-image-with-orange-and-purple-gradient-combination-and-the-right-corner-has-to-be-empty-and-add-some-blockchain-hint-in-the-image.jpg') no-repeat center center;
+  background-size: cover;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+.nav,
+.nav .nav-links {
+  display: flex;
+  align-items: center;
+}
+.nav {
+  justify-content: space-between;
+}
+a {
+  color: #fff;
+  text-decoration: none;
+}
+.nav .logo {
+  font-size: 22px;
+  font-weight: 500;
+}
+.nav .nav-links {
+  column-gap: 20px;
+  list-style: none;
+}
+.nav .nav-links a {
+  transition: all 0.2s linear;
+}
+.nav .nav-links a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+.nav .search-icon {
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+.nav .search-box {
+  position: absolute;
+  right: 250px;
+  height: 45px;
+  max-width: 555px;
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.2s linear;
+}
+.nav.openSearch .search-box {
+  opacity: 1;
+  pointer-events: auto;
+}
+.search-box .search-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  left: 15px;
+  color: #4a98f7;
+  transform: translateY(-50%);
+}
+.search-box input {
+  height: 100%;
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 6px;
+  background-color: #fff;
+  padding: 0 15px 0 45px;
+}
+
+.nav .navOpenBtn,
+.nav .navCloseBtn {
+  display: none;
+}
+
+/* responsive */
+/* @media screen and (max-width: 1160px) {
+  .nav {
+      padding: 15px 100px;
+  }
+  .nav .search-box {
+      right: 150px;
+  }
+}
+@media screen and (max-width: 950px) {
+  .nav {
+      padding: 15px 50px;
+  }
+  .nav .search-box {
+      right: 100px;
+      max-width: 400px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .nav .navOpenBtn,
+  .nav .navCloseBtn {
+      display: block;
+  }
+  .nav {
+      padding: 15px 20px;
+  }
+  .nav .nav-links {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      height: 100%;
+      max-width: 280px;
+      width: 100%;
+      padding-top: 100px;
+      row-gap: 30px;
+      flex-direction: column;
+      background-color: #11101d;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      transition: all 0.4s ease;
+      z-index: 100;
+  }
+  .nav.openNav .nav-links {
+      left: 0;
+  }
+  .nav .navOpenBtn {
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+  }
+  .nav .navCloseBtn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+  }
+  .nav .search-box {
+      top: calc(100% + 10px);
+      max-width: calc(100% - 20px);
+      right: 50%;
+      transform: translateX(50%);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+}
+.background-image h1 {
+    color: #fff;
+    font-size: 36px;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 50px;
+}
+
+.card {
+    width: 200px;
+    background: linear-gradient(to right, #FFA500, #4B0082); /* Gradient background */
+    /* border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card img {
+    width: 100%;
+    height: 150px; /* Adjust height as needed */
+    /* object-fit: cover;
+}
+
+.card p {
+    text-align: center;
+    color: #fff;
+    font-size: 18px;
+    padding: 10px 0;
+} */
+
+
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #A55EEA, #FF7675); /* Gradient background */
+  color: #fff;
+}
+
+.nav {
+  background: linear-gradient(to right, #A55EEA, #FF7675); /* Gradient background */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.logo {
+  color: #fff;
+  text-decoration: none;
+  font-size: 20px;
+  margin-left: 20px;
+}
+
+.nav-links {
+  list-style: none;
+  margin-right: 20px;
+}
+
+.nav-links li {
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.nav-links li a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+  color: #ccc;
+}
+
+.background-image {
+  background: url('WhatsApp\ Image\ 2024-03-02\ at\ 8.48.23\ PM.jpeg') no-repeat center center;
+  /* background-size: cover;
+  text-align: center;
+  padding: 100px 0; /* Adjust spacing */
+  /* width: 100%;
+  height: 100%; */ 
+  background-size: cover;
+  background-position: center;
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  text-align: center;
+}
+
+.background-image h1 {
+  color: #fff;
+  font-size: 36px;
+}
+.background-image p {
+  /* justify-content: center; */
+  align-items: center
+}
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 20px; /* Adjust spacing */
+}
+
+.card {
+  width: 200px;
+  background: linear-gradient(to right, #FFA500, #4B0082); /* Gradient background */
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card img {
+  width: 100%;
+  height: 150px; /* Adjust height as needed */
+  object-fit: cover;
+}
+
+.card p {
+  text-align: center;
+  color: #fff;
+  font-size: 18px;
+  padding: 10px 0;
+}
+
+.about-section {
+  background-color: #fff;
+  padding: 50px 0;
+}
+
+.about-content {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 30px;
+}
+
+.about-content h2 {
+  color: #333;
+  font-size: 28px;
+}
+
+.about-content p {
+  color: #666;
+  font-size: 18px;
+}
+
+.car-animation {
+  position: relative;
+  margin-top: 50px;
+}
+
+.car-animation img {
+  width: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: carMove 5s linear infinite;
+}
+
+.car-animation .path {
+  width: 100%;
+  height: 5px;
+  background-color: #333;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  animation: pathMove 5s linear infinite;
+}
+
+@keyframes carMove {
+  0% { left: 0; }
+  50% { left: calc(100% - 100px); }
+  100% { left: 0; }
+}
+
+@keyframes pathMove {
+  0% { width: 0; }
+  50% { width: 100%; }
+  100% { width: 0; }
+}
+.footer {
+  background: linear-gradient(to right, #A55EEA, #FF7675); /* Same gradient as the webpage */
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+}
+
+#typingText {
+  font-size: 38px;
+  color: #ffffff; /* Text color */
+  background: linear-gradient(to right, #f5a104, #ffffff); 
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

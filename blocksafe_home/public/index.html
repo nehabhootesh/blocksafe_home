@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlockSafe</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <nav class="nav">
+        <a href="#" class="logo">BlockSafe</a>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="Dlogin.html">Login As Driver</a></li>
+            <li><a href="Clogin.html">Login As Passenger</a></li>
+            <li><a href="ipfsregistration\index.html">Sign Up</a></li>
+            <li><a href="https://check-verification-status.onrender.com/">Check Verification Status</a></li>
+            <li><a href="https://admin-login-page.onrender.com/">Admin Login</a></li>
+        </ul>
+    </nav>
+
+    <div class="background-image">
+        <!-- <h1>Welcome to BlockSafe</h1> -->
+        <!-- <p>Experience secure and transparent car pooling powered by blockchain technology</p> -->
+        <p id="typingText"></p>
+    </div>
+
+    <div class="card-container">
+        <div class="card">
+            <img src="security-in-car-pooling-using-blockchain--the-image-shoud-be-combination-of-purple-and-orange.jpg" alt="Security">
+            <p>Security</p>
+        </div>
+        <div class="card">
+            <img src="safety-in-car-pooling-using-blockchain--the-image-shoud-be-combination-of-purple-and-orange.jpg" alt="Safety">
+            <p>Safety</p>
+        </div>
+        <div class="card">
+            <img src="privacy-in-car-pooling-using-blockchain--the-image-shoud-be-combination-of-purple-and-orange.jpg" alt="Privacy">
+            <p>Privacy</p>
+        </div>
+        <div class="card">
+            <img src="decentralization-in-car-pooling-using-blockchain--the-image-shoud-be-combination-of-purple-and-orange.jpg" alt="Decentralization">
+            <p>Decentralization</p>
+        </div>
+    </div>
+    <section class="about-section">
+        <div class="about-content">
+            <h2>About BlockSafe</h2>
+            <p>BlockSafe is a sustainable and cost-effective transportation solution that allows multiple passengers to share a single vehicle, reducing traffic congestion and carbon emissions. Blockchain technology plays a crucial role in carpooling by providing secure and transparent transactions, ensuring trust among participants, and enabling efficient management of ride-sharing data.</p>
+        </div>
+        <div class="car-animation">
+            <img src="moving-straight-car-with-the-same-orange-and-purple-with-plain-white-background--side-of-the-car-only-one-removebg-preview (1).png" alt="Car">
+            <div class="path"></div>
+        </div>
+    </section>
+    <footer class="footer">
+        <p>&copy; 2024 BlockSafe. All rights reserved.</p>
+    </footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const textdata = [
+        "Secure Car Pooling Powered by Blockchain",
+        "Join Now!"
+    ];
+    
+    let index = 0;
+    let letterIndex = 0;
+    let typingTextElement = document.getElementById("typingText");
+    
+    function type() {
+        if (index < textdata.length) {
+            let currentText = textdata[index];
+            typingTextElement.innerHTML = currentText.slice(0, letterIndex + 1);
+            letterIndex++;
+    
+            if (letterIndex <= currentText.length) {
+                setTimeout(type, 100); // Typing speed
+            } else {
+                setTimeout(clearText, 2000); // Wait for 2 seconds before clearing
+            }
+        } else {
+            index = 0;
+            setTimeout(type, 100); // Repeat typing animation
+        }
+    }
+    
+    function clearText() {
+        let currentText = textdata[index];
+        if (letterIndex >= 0) {
+            typingTextElement.innerHTML = currentText.slice(0, letterIndex);
+            letterIndex--;
+            setTimeout(clearText, 100); // Deleting speed
+        } else {
+            index++;
+            letterIndex = 0;
+            setTimeout(type, 1000); // Wait for 1 second before typing next line
+        }
+    }
+    
+    type(); // Start typing animation
+});
+
+</script>
+</body>
+</html>

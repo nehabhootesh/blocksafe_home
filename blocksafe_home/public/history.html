@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ride Requests</title>
+     
+  <style>
+            body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #A55EEA, #FF7675);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .nav {
+        background: linear-gradient(to right, #A55EEA, #FF7675); /* Gradient background */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 15px 0;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 10px;
+    }
+
+    .navbar a {
+        float: left;
+        display: block;
+        color: rgb(0, 0, 0);
+        text-align: center;
+        padding: 14px 20px;
+        text-decoration: none;
+        color: #fff;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .navbar a:hover {
+        background-color: #ddd;
+        color: black;
+    }
+
+    .logo {
+        color: #fff;
+        text-decoration: none;
+        font-size: 20px;
+        margin-left: 20px;
+    }
+
+    .nav-links {
+        list-style: none;
+        margin-right: 20px;
+    }
+
+    .nav-links li {
+        display: inline-block;
+        margin-left: 20px;
+    }
+
+    .nav-links li a {
+        color: #fff;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .nav-links li a:hover {
+        color: #ccc;
+    }
+    h1 {
+      text-align: center;
+      color: #fff;
+      margin-top: 80px;
+      margin-bottom: 30px;
+      display: inline;
+    }
+
+    .button-container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .button {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      background: linear-gradient(to right, #FFA500, #4B0082);
+      color: #fff;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+      margin-right: 10px; 
+      margin-bottom: 10px;
+    }
+    .button:hover {
+      background: linear-gradient(to right, #9448ED, #FF6B6B);
+    }
+
+    .ride-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .card {
+      width: auto;
+      margin: 10px;
+      padding: 20px;
+      border-radius: 10px;
+      background: linear-gradient(to right, orange, purple);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card-content {
+      color: #fff;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .textToCopy {
+      color: #fff;
+    }
+
+    .textToCopy:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    .textToCopy + button {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 14px;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .textToCopy + button:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+   <!-- Navigation bar -->
+   <nav class="nav">
+    <a href="#" class="logo">BlockSafe</a>
+    <ul class="nav-links">
+        <li><a href="/Cpage">Home</a></li>
+        <li><a href="/request_ride">Create Request</a></li>
+        <li><a href="/ride_requests">Ride Requests</a></li>
+        <li><a href="/history">Rides</a></li>
+        <li><a href="/ch_ride_st">Change ride status</a></li>
+        <li><a href="/support">Support</a></li>
+        <li><a href="/logout">Logout</a></li>
+    </ul>
+</nav>
+
+
+  <h1>Accepted Ride</h1>
+  <div id="button-container">
+  <button id="abutton" onclick="fetchDataA()" class="button">Fetch Data</button></div>
+  <ul id="rideLista"></ul>
+  <script>
+
+
+    function fetchDataA() {
+      fetch('/accepted')
+        .then(response => response.json())
+        .then(data => {
+          const rideList = document.getElementById('rideLista');
+          rideList.innerHTML = '';
+          data.forEach(ride => {
+            const lia = document.createElement('div');
+            lia.classList.add('card');
+            lia.innerHTML = `
+              <strong>Driver ID:</strong> ${ride.DriverID}<br>
+              <strong>Customer ID:</strong> ${ride.CustomerID}<br>
+              <strong>Ride ID:</strong> <span class="textToCopy">${ride.RideID}</span>
+              <button onclick="copyToClipboard(this.parentNode.querySelector('.textToCopy'))">Copy</button><br>
+              <strong>Departure Time:</strong> ${ride.DepartureTime}<br>
+              <strong>From:</strong> ${ride.From}<br>
+              <strong>To:</strong> ${ride.To}<br>
+              <strong>Cost:</strong> ${ride.Cost}<br>
+              <strong>Number of Seats:</strong> ${ride.NumberOfSeat}<br>
+              <strong>Submitted Time:</strong> ${ride.SubmittedTime}<br>
+              <strong>Pickup Location:</strong> ${ride.PickupLocation}<br>
+              <strong>Drop Location:</strong> ${ride.DropLocation}<br>
+              <br><br>
+            `;
+            rideList.appendChild(lia);
+          });
+        })
+        .catch(error => console.error('Error:', error));
+    }
+      
+    function copyToClipboard1(textToCopy) {
+      /* Create a temporary textarea element to perform the copy operation */
+      var tempTextArea = document.createElement("textarea");
+      tempTextArea.value = textToCopy.innerText;
+      document.body.appendChild(tempTextArea);
+
+      /* Select the text inside the textarea */
+      tempTextArea.select();
+      tempTextArea.setSelectionRange(0, 99999); /* For mobile devices */
+
+      /* Copy the text inside the textarea to the clipboard */
+      document.execCommand("copy");
+
+      /* Remove the temporary textarea */
+      document.body.removeChild(tempTextArea);
+
+      /* Alert the user */
+      alert("Copied the text: " + textToCopy.innerText);
+    }
+  
+  
+  </script>
+
+  <h1>Not Yet Started Ride</h1>
+  <div id="button-container">
+  <button id="abutton" onclick="fetchDataN()" class="button">Fetch Data</button></div>
+  <ul id="rideListN"></ul>
+  <script>
+
+       
+    function fetchDataN() {
+      fetch('/notyetstarted')
+        .then(response => response.json())
+        .then(data => {
+          const rideList = document.getElementById('rideListN');
+          rideList.innerHTML = '';
+          data.forEach(ride => {
+            const lia = document.createElement('div');
+            lia.classList.add('card');
+            lia.innerHTML = `
+              <strong>Driver ID:</strong> ${ride.DriverID}<br>
+              <strong>Customer ID:</strong> ${ride.CustomerID}<br>
+              <strong>Ride ID:</strong> <span class="textToCopy">${ride.RideID}</span>
+              <button onclick="copyToClipboard(this.parentNode.querySelector('.textToCopy'))">Copy</button><br>
+              <strong>Driver Confirmation:</strong> ${ride.DriverConfirmation}<br>
+              <strong>CustomerConfirmation:</strong> ${ride.CustomerConfirmation}<br>
+              <strong>Submitted Time:</strong> ${ride.SubmittedTime}<br>
+              <br><br>
+            `;
+            rideList.appendChild(lia);
+          });
+        })
+        .catch(error => console.error('Error:', error));
+    }
+      
+    function copyToClipboard1(textToCopy) {
+      /* Create a temporary textarea element to perform the copy operation */
+      var tempTextArea = document.createElement("textarea");
+      tempTextArea.value = textToCopy.innerText;
+      document.body.appendChild(tempTextArea);
+
+      /* Select the text inside the textarea */
+      tempTextArea.select();
+      tempTextArea.setSelectionRange(0, 99999); /* For mobile devices */
+
+      /* Copy the text inside the textarea to the clipboard */
+      document.execCommand("copy");
+
+      /* Remove the temporary textarea */
+      document.body.removeChild(tempTextArea);
+
+      /* Alert the user */
+      alert("Copied the text: " + textToCopy.innerText);
+    }
+  
+  
+  </script>
+
+  
+  <h1>Started Ride</h1>
+  <div id="button-container">
+  <button id="abutton" onclick="fetchDataS()" class="button">Fetch Data</button></div>
+  <ul id="rideListS"></ul>
+  <script>
+
+    
+    function fetchDataS() {
+      fetch('/started')
+        .then(response => response.json())
+        .then(data => {
+          const rideList = document.getElementById('rideListS');
+          rideList.innerHTML = '';
+          data.forEach(ride => {
+            const lis = document.createElement('div');
+            lis.classList.add('card');
+            lis.innerHTML = `
+              <strong>Driver ID:</strong> ${ride.DriverID}<br>
+              <strong>Customer ID:</strong> ${ride.CustomerID}<br>
+              <strong>Ride ID:</strong> <span class="textToCopy">${ride.RideID}</span>
+              <button onclick="copyToClipboard1(this.parentNode.querySelector('.textToCopy'))">Copy</button><br>
+              <strong>Driver Confirmation:</strong> ${ride.DriverConfirmation}<br>
+              <strong>CustomerConfirmation:</strong> ${ride.CustomerConfirmation}<br>
+              <strong>Submitted Time:</strong> ${ride.SubmittedTime}<br>
+              <br><br>
+            `;
+            rideList.appendChild(lis);
+          });
+        })
+        .catch(error => console.error('Error:', error));
+    }
+    
+    function copyToClipboard1(textToCopy) {
+      /* Create a temporary textarea element to perform the copy operation */
+      var tempTextArea = document.createElement("textarea");
+      tempTextArea.value = textToCopy.innerText;
+      document.body.appendChild(tempTextArea);
+
+      /* Select the text inside the textarea */
+      tempTextArea.select();
+      tempTextArea.setSelectionRange(0, 99999); /* For mobile devices */
+
+      /* Copy the text inside the textarea to the clipboard */
+      document.execCommand("copy");
+
+      /* Remove the temporary textarea */
+      document.body.removeChild(tempTextArea);
+
+      /* Alert the user */
+      alert("Copied the text: " + textToCopy.innerText);
+    }
+  
+  
+  </script>
+
+  
+  <h1>Declined Ride</h1>
+  <div id="button-container">
+  <button id="abutton" onclick="fetchDataD()" class="button">Fetch Data</button></div>
+  <ul id="rideListD"></ul>
+  <script>
+
+      //pending
+    function fetchDataD() {
+      fetch('/declined')
+        .then(response => response.json())
+        .then(data => {
+          const rideList = document.getElementById('rideListD');
+          rideList.innerHTML = '';
+          data.forEach(ride => {
+            const liD = document.createElement('div');
+            liD.classList.add('card');
+            liD.innerHTML = `
+              <strong>Driver ID:</strong> ${ride.DriverID}<br>
+              <strong>Customer ID:</strong> ${ride.CustomerID}<br>
+              <strong>Ride ID:</strong> <span class="textToCopy">${ride.RideID}</span>
+              <button onclick="copyToClipboard(this.parentNode.querySelector('.textToCopy'))">Copy</button><br>
+              <strong>Reason for Decline from Driver:</strong> ${ride.DriverReason}<br>
+              <strong>Reason for Decline from Customer:</strong> ${ride.CustomerReason}<br>
+              <strong>Submitted Time:</strong> ${ride.SubmittedTime}<br>
+              <br><br>
+            `;
+            rideList.appendChild(liD);
+          });
+        })
+        .catch(error => console.error('Error:', error));
+    }
+      
+    function copyToClipboard1(textToCopy) {
+      /* Create a temporary textarea element to perform the copy operation */
+      var tempTextArea = document.createElement("textarea");
+      tempTextArea.value = textToCopy.innerText;
+      document.body.appendChild(tempTextArea);
+
+      /* Select the text inside the textarea */
+      tempTextArea.select();
+      tempTextArea.setSelectionRange(0, 99999); /* For mobile devices */
+
+      /* Copy the text inside the textarea to the clipboard */
+      document.execCommand("copy");
+
+      /* Remove the temporary textarea */
+      document.body.removeChild(tempTextArea);
+
+      /* Alert the user */
+      alert("Copied the text: " + textToCopy.innerText);
+    }
+  
+  
+  </script>
+ 
+
+  <h1>Completed Rides</h1>
+  <div id="button-container">
+  <button id="abutton" onclick="fetchDataE() " class="button">Fetch Data</button></div>
+  <ul id="rideListE"></ul>
+  <script>
+    function fetchDataE() {
+      fetch('/completed')
+        .then(response => response.json())
+        .then(data => {
+          const rideList = document.getElementById('rideListE');
+          rideList.innerHTML = '';
+          data.forEach(ride => {
+            const liE = document.createElement('div');
+            liE.classList.add('card');
+            liE.innerHTML = `
+            <strong>Driver ID:</strong> ${ride.DriverID}<br>
+            <strong>Customer ID:</strong> ${ride.CustomerID}<br>
+            <strong>Ride ID:</strong> <span class="textToCopy">${ride.RideID}</span>
+            <button onclick="copyToClipboard1(this.parentNode.querySelector('.textToCopy'))">Copy</button><br>
+            <strong>Driver Confirmation:</strong> ${ride.DriverConfirmation}<br>
+            <strong>Customer Confirmation:</strong> ${ride.CustomerConfirmation}<br>
+            <strong>Driver Completed:</strong> ${ride.DriverCompleted}<br>
+            <strong>Customer Completed:</strong> ${ride.CustomerCompleted}<br>
+            <strong>Payment Status:</strong> ${ride.PaymentStatus}<br>
+            <strong>Submitted Time:</strong> ${ride.SubmittedTime}<br>
+            <br>
+            `;
+            rideList.appendChild(liE);
+          });
+        })
+        .catch(error => console.error('Error:', error));
+    }
+      
+    function copyToClipboard(textToCopy) {
+      /* Create a temporary textarea element to perform the copy operation */
+      var tempTextArea = document.createElement("textarea");
+      tempTextArea.value = textToCopy.innerText;
+      document.body.appendChild(tempTextArea);
+
+      /* Select the text inside the textarea */
+      tempTextArea.select();
+      tempTextArea.setSelectionRange(0, 99999); /* For mobile devices */
+
+      /* Copy the text inside the textarea to the clipboard */
+      document.execCommand("copy");
+
+      /* Remove the temporary textarea */
+      document.body.removeChild(tempTextArea);
+
+      /* Alert the user */
+      alert("Copied the text: " + textToCopy.innerText);
+    }
+  
+  
+  
+  </script>
+
+  
+
+</body>
+</html>

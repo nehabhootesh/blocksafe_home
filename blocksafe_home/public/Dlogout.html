@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to right, #A55EEA, #FF7675);
+        text-align: center;
+        padding-top: 0px;
+    }
+    .container {
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 20px;
+        border-radius: 5px;
+        background: linear-gradient(to right, #FFA500, #4B0082);
+      }
+    .container:hover {
+        transform: translateY(-8px);
+    }
+
+    .nav {
+        background: linear-gradient(to right, #A55EEA, #FF7675); /* Gradient background */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 15px 0;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 10px;
+    }
+
+    .navbar a {
+        float: left;
+        display: block;
+        color: rgb(0, 0, 0);
+        text-align: center;
+        padding: 14px 20px;
+        text-decoration: none;
+        color: #fff;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .navbar a:hover {
+        background-color: #ddd;
+        color: black;
+    }
+
+    .logo {
+        color: #fff;
+        text-decoration: none;
+        font-size: 20px;
+        margin-left: 20px;
+    }
+
+    .nav-links {
+        list-style: none;
+        margin-right: 20px;
+    }
+
+    .nav-links li {
+        display: inline-block;
+        margin-left: 20px;
+    }
+
+    .nav-links li a {
+        color: #fff;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .nav-links li a:hover {
+        color: #ccc;
+    }
+  /* Adjust page content */
+  .content {
+    padding: 20px;
+  }
+
+  h1 {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input {
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  h1 {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 30px;
+  }
+  p {
+    text-align: center;
+  }
+  
+  form {
+    text-align: center;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+    color: #fff;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  select {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+  }
+  
+  button {
+    width: calc(50% - 5px); /* Adjust button width */
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    background: linear-gradient(to right, #FFA500, #4B0082);
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-right: 10px; 
+    margin-bottom: 10px;/* Add space between buttons */
+  }
+  
+  /* button:last-child {
+    margin-right: 0; /* Remove margin from last button */
+  /* } */ 
+  
+  button:hover {
+    background: linear-gradient(to right, #9448ED, #FF6B6B);
+  }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation bar -->
+  <nav class="nav">
+    <a href="#" class="logo">BlockSafe</a>
+    <ul class="nav-links">
+        <li><a href="/Dpage">Home</a></li>
+        <li><a href="/Drequest_ride">Create Request</a></li>
+        <li><a href="/Dride_requests">Ride Requests</a></li>
+        <li><a href="/Dhistory">Rides</a></li>
+        <li><a href="/Dch_ride_st">Change ride status</a></li>
+        <li><a href="/Dsupport">Support</a></li>
+        <li><a href="/Dlogout">Logout</a></li>
+    </ul>
+</nav>
+
+
+    <h1>Logout</h1>
+    <p>Are you sure you want to logout?</p>
+    <form action="/Drilogout" method="post">
+        <button type="submit" class="logout-button">Logout</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,119 @@
+/* body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+#driverFields {
+    display: none;
+} */
+
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #A55EEA, #FF7675);
+    margin: 0;
+    padding: 0;
+}
+.register-card {
+    background: linear-gradient(to right, #FFA500, #4B0082);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #A55EEA, #FF7675);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 5px;
+    background: linear-gradient(to right, #FFA500, #4B0082);
+}
+
+.card {
+    background: linear-gradient(to right,  #FFA500, #4B0082);
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+h2 {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+form {
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #fff;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+}
+
+button {
+    width: calc(50% - 5px); /* Adjust button width */
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    background: linear-gradient(to right, #A55EEA, #FF7675);
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-right: 10px; 
+    margin-bottom: 10px;/* Add space between buttons */
+}
+
+/* button:last-child {
+    margin-right: 0; /* Remove margin from last button */
+/* } */ 
+
+button:hover {
+    background: linear-gradient(to right, #9448ED, #FF6B6B);
+}
+
+

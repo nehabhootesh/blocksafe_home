@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Change Ride status</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #A55EEA, #FF7675);
+      padding-top: 0px;
+  }
+  .container {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      border-radius: 5px;
+      background: linear-gradient(to right, #FFA500, #4B0082);
+    }
+  .container:hover {
+      transform: translateY(-8px);
+  }
+
+  .nav {
+        background: linear-gradient(to right, #A55EEA, #FF7675); /* Gradient background */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 15px 0;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 10px;
+    }
+
+    .navbar a {
+        float: left;
+        display: block;
+        color: rgb(0, 0, 0);
+        text-align: center;
+        padding: 14px 20px;
+        text-decoration: none;
+        color: #fff;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .navbar a:hover {
+        background-color: #ddd;
+        color: black;
+    }
+
+    .logo {
+        color: #fff;
+        text-decoration: none;
+        font-size: 20px;
+        margin-left: 20px;
+    }
+
+    .nav-links {
+        list-style: none;
+        margin-right: 20px;
+    }
+
+    .nav-links li {
+        display: inline-block;
+        margin-left: 20px;
+    }
+
+    .nav-links li a {
+        color: #fff;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .nav-links li a:hover {
+        color: #ccc;
+    }
+
+  /* Adjust page content */
+  .content {
+    padding: 20px;
+  }
+
+  h1 {
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    color: #fff;
+  }
+
+  input {
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+
+  button {
+    width: calc(50% - 5px); /* Adjust button width */
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    background: linear-gradient(to right, #FFA500, #4B0082);
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-right: 10px; 
+    margin-bottom: 10px;/* Add space between buttons */
+  }
+  button:hover {
+    background: linear-gradient(to right, #9448ED, #FF6B6B);
+  }
+  h1 {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 30px;
+  }
+  /*
+  form {
+    text-align: center;
+  }*/
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  select {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+  }
+  input[type="submit"]{
+    background: linear-gradient(to right, #FFA500, #4B0082);
+    color: black;
+  }
+
+  input[type="submit"]:hover{
+      background: linear-gradient(to right, #9448ED, #FF6B6B);
+      color: black;
+    }
+
+  /* button:last-child {
+    margin-right: 0; /* Remove margin from last button */
+  /* } */ 
+  .card-container {
+    margin-top: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 5px;
+    cursor: pointer;
+    background-color: linear-gradient(to right, #FFA500, #4B0082);
+    width: 200px; /* Set width for vertical rectangle */
+    overflow: hidden; /* Hide overflow content */
+    transition: transform 0.3s; /* Add transition for pop effect */
+  }
+  
+  .card img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .card-content {
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .card:hover {
+    background-color: linear-gradient(to right, #9448ED, #FF6B6B);
+    transform: scale(1.05); /* Increase size on hover */
+  }
+  
+  </style>
+  <style>
+    
+
+    /* Form styling */
+    form {
+      margin-top: 20px;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    input[type="text"],
+    input[type="datetime-local"],
+    input[type="number"],
+    input[type="submit"],
+    button {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      border: none;
+      border-radius: 4px;
+      box-sizing: border-box;
+      cursor: pointer;
+      background-color: #333;
+      color: white;
+      font-size: 16px;
+    }
+
+    
+  </style>
+</head>
+<body>
+
+    <!-- Navigation bar -->
+    <nav class="nav">
+      <a href="#" class="logo">BlockSafe</a>
+      <ul class="nav-links">
+          <li><a href="/Dpage">Home</a></li>
+          <li><a href="/Drequest_ride">Create Request</a></li>
+          <li><a href="/Dride_requests">Ride Requests</a></li>
+          <li><a href="/Dhistory">Rides</a></li>
+          <li><a href="/Dch_ride_st">Change ride status</a></li>
+          <li><a href="/Dsupport">Support</a></li>
+          <li><a href="/Dlogout">Logout</a></li>
+      </ul>
+  </nav>
+
+  <div class="card-container">
+    <!-- Card to show the Accept Ride form -->
+    <div class="card" onclick="showForm('accept')">
+      <img src=".\icons\join.png" alt="Accept Ride Image">
+      <div class="card-content">Accept Ride</div>
+    </div>
+  
+
+    <!-- Card to show the Start Ride form -->
+    <div class="card" onclick="showForm('start')">
+      <img src=".\icons\start.png" alt="Start Ride Image">
+      <div class="card-content">Start Ride</div>
+    </div>
+  
+
+    <!-- Card to show the Decline Ride form -->
+    <div class="card" onclick="showForm('decline')">
+      <img src=".\icons\decline.png" alt="Decline Ride Image">
+      <div class="card-content">Decline Ride</div>
+    </div>
+  
+
+    <!-- Card to show the Complete Ride form -->
+    <div class="card" onclick="showForm('complete')">
+      <img src=".\icons\complete.png" alt="Complete Ride Image">
+      <div class="card-content">Complete Ride</div>
+    </div>
+  
+
+    <!-- Card to show the Check Payment Status form -->
+    <div class="card" onclick="showForm('paymentStatus')">
+      <img src=".\icons\pay.png" alt="Check Payment Status Image">
+      <div class="card-content">Check Payment Status</div>
+    </div>
+
+    <br>
+
+  <!-- Form for accepting a ride -->
+  <form id="acceptForm" action="/DAccept" method="get">
+    <h4>Please use customer ride ID</h4>
+    <label for="acceptRideId">Ride ID:</label>
+    <input type="text" id="acceptRideId" name="rideId" placeholder="Enter Ride ID" required>
+    <button type="button" onclick="pasteRideId('accept')">Paste</button>
+    <button type="button" onclick="fetchData('accept')">Fetch Data</button>
+    <br>
+    <input type="submit" value="Accept" class="submitButton" id="Asubmit">
+  </form>
+
+  <!-- Form for starting a ride -->
+  <form id="startForm" action="/DStart" method="get" style="display: none;">
+    <h4>Please use accepted ride ID</h4>
+    <label for="startRideId">Ride ID:</label>
+    <input type="text" id="startRideId" name="rideId" placeholder="Enter Ride ID" required>
+    <button type="button" onclick="pasteRideId('start')">Paste</button>
+    <button type="button" onclick="fetchDataA('start')">Fetch Data</button>
+    <br>
+    <input type="submit" value="Start" class="submitButton">
+  </form>
+
+  <!-- Form for declining a ride -->
+  <form id="declineForm" action="/DDecline" method="get" style="display: none;">
+    <h4>Please use accepted/notstarted/started Ride ID</h4>
+    <label for="declineRideId">Ride ID:</label>
+    <input type="text" id="declineRideId" name="rideId" placeholder="Enter Ride ID" required>
+    <button type="button" onclick="pasteRideId('decline')">Paste</button>
+    <label for="Reason">Reason for decline:</label>
+    <input type="text" id="reason" name="reason" placeholder="Please enter reason for decline" required>
+    <!-- <button type="button" onclick="fetchDataForDecline('decline');fetchDataForDecline('decline');fetchDataA('decline'); fetchDataN('decline');fetchDataS('decline');">Fetch Data</button>  -->
+    <br>
+    <input type="submit" value="Decline" class="submitButton">
+  </form>
+
+  <!-- Form for completing a ride -->
+  <form id="completeForm" action="/DComplete" method="get" style="display: none;">
+    <label for="completeRideId">Ride ID:</label>
+    <input type="text" id="completeRideId" name="rideId" placeholder="Enter Ride ID" required>
+    <button type="button" onclick="pasteRideId('complete')">Paste</button>
+    <button type="button" onclick="fetchDataS('complete')">Fetch Data</button>
+    <br>
+    <input type="submit" value="Complete" class="submitButton">
+  </form>
+
+  <!-- Form for checking payment status -->
+  <form id="paymentStatusForm" action="/DPaymentStatus" method="get" style="display: none;">
+    <label for="paymentStatusRideId">Ride ID:</label>
+    <input type="text" id="paymentStatusRideId" name="rideId" placeholder="Enter Ride ID" required>
+    <button type="button" onclick="pasteRideId('paymentStatus')">Paste</button>
+    <button type="button" onclick="fetchDataE('paymentStatus')">Fetch Data</button>
+    <br>
+    <input type="submit" value="Check Payment Status" class="submitButton">
+  </form>
+
+  <ul id="rideList"></ul>
+
+  <script>
+    // Function to show/hide forms based on the selected action
+    function showForm(action) {
+      // Hide all forms
+      document.querySelectorAll('form').forEach(form => {
+        form.style.display = 'none';
+      });
+
+      // Show the selected form
+      document.getElementById(`${action}Form`).style.display = 'block';
+    }
+
+    // Function to fetch data for a specific action
+    function fetchData(action) {
+      const rideId = document.getElementById(`${action}RideId`).value;
+
+      fetch(`/DFetchC?rideId=${rideId}`)
+        .then(response => response.json())
+        .then(data => {
+          const rideList = document.getElementById('rideList');
+          rideList.innerHTML = '';
+          data.forEach(ride => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+              <strong>Customer ID:</strong> ${ride.CustomerID}<br>
+              <strong>Ride ID:</strong> ${ride.RideID}<br>
+              <strong>Departure Time:</strong> ${ride.DepartureTime}<br>
+              <strong>From:</strong> ${ride.From}<br>
+              <strong>To:</strong> ${ride.To}<br>
+              <strong>Price Quotation:</strong> ${ride.Cost}<br>
+              <strong>Number of Seats:</strong> ${ride.NumberOfSeat}<br>
+              <strong>Submitted Time:</strong> ${ride.SubmittedTime}<br>
+              <strong>Pickup Location:</strong> ${ride.PickupLocation}<br>
+              <strong>Drop Location:</strong> ${ride.DropLocation}<br>
+              <br>
+            `;
+            rideList.appendChild(li);
+          });
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+    // Function to fetch data from Accepted_ride
+    function fetchDataA(action) {
+      const rideId = document.getElementById(`${action}RideId`).value;
+
+      fetch(`/DFetchA?rideId=${rideId}`)
+        .then(response => response.json())
+        .then(data => {
+          const rideList = document.getElementById('rideList');
+          rideList.innerHTML = '';
+          data.forEach(ride => {
+            const liA = document.createElement('li');
+            liA.innerHTML = `
+              <strong>Driver ID:</strong> ${ride.DriverID}<br>
+              <strong>Customer ID:</strong> ${ride.CustomerID}<br>
+              <strong>Ride ID:</strong> ${ride.RideID}<br>
+              <strong>Departure Time:</strong> ${ride.DepartureTime}<br>
+              <strong>From:</strong> ${ride.From}<br>
+              <strong>To:</strong> ${ride.To}<br>              
+              <strong>Cost:</strong> ${ride.Cost}<br>
+              <strong>Number of Seats:</strong> ${ride.NumberOfSeat}<br>
+              <strong>Submitted Time:</strong> ${ride.SubmittedTime}<br>
+              <strong>Pickup Location:</strong> ${ride.PickupLocation}<br>
+              <strong>Drop Location:</strong> ${ride.DropLocation}<br>
+              <br>
+            `;
+            rideList.appendChild(liA);
+          });
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+       
+    // Function to fetch data from notyet_started_ride
+    function fetchDataN(action) {
+      const rideId = document.getElementById(`${action}RideId`).value;
+
+      fetch(`/DFetchN?rideId=${rideId}`)
+        .then(response => response.json())
+        .then(data => {
+          const rideList = document.getElementById('rideList');
+          rideList.innerHTML = '';
+          data.forEach(ride => {
+            const liN = document.createElement('li');
+            liN.innerHTML = `
+              <strong>Driver ID:</strong> ${ride.DriverID}<br>
+              <strong>Customer ID:</strong> ${ride.CustomerID}<br>
+              <strong>Ride ID:</strong> ${ride.RideID}<br>
+              <strong>Driver Confirmation:</strong> ${ride.DriverConfirmation}<br>
+              <strong>Customer Confirmation:</strong> ${ride.CustomerConfirmation}<br>
+              <strong>Submitted Time:</strong> ${ride.SubmittedTime}<br>
+              <br>
+            `;
+            rideList.appendChild(liN);
+          });
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+    
+    // Function to fetch data from Started_ride
+    function fetchDataS(action) {
+      const rideId = document.getElementById(`${action}RideId`).value;
+
+      fetch(`/DFetchS?rideId=${rideId}`)
+        .then(response => response.json())
+        .then(data => {
+          const rideList = document.getElementById('rideList');
+          rideList.innerHTML = '';
+          data.forEach(ride => {
+            const liS = document.createElement('li');
+            liS.innerHTML = `
+              <strong>Driver ID:</strong> ${ride.DriverID}<br>
+              <strong>Customer ID:</strong> ${ride.CustomerID}<br>
+              <strong>Ride ID:</strong> ${ride.RideID}<br>
+              <strong>Driver Confirmation:</strong> ${ride.DriverConfirmation}<br>
+              <strong>CustomerConfirmation:</strong> ${ride.CustomerConfirmation}<br>
+              <strong>Submitted Time:</strong> ${ride.SubmittedTime}<br>
+              <br>
+            `;
+            rideList.appendChild(liS);
+          });
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+    // Function to fetch data from Completed_ride
+    function fetchDataE(action) {
+      const rideId = document.getElementById(`${action}RideId`).value;
+
+      fetch(`/DFetchE?rideId=${rideId}`)
+        .then(response => response.json())
+        .then(data => {
+          const rideList = document.getElementById('rideList');
+          rideList.innerHTML = '';
+          data.forEach(ride => {
+            const liE = document.createElement('li');
+            liE.innerHTML = `
+              <strong>Driver ID:</strong> ${ride.DriverID}<br>
+              <strong>Customer ID:</strong> ${ride.CustomerID}<br>
+              <strong>Ride ID:</strong> ${ride.RideID}<br>
+              <strong>Driver Confirmation:</strong> ${ride.DriverConfirmation}<br>
+              <strong>Customer Confirmation:</strong> ${ride.CustomerConfirmation}<br>
+              <strong>Driver Completed:</strong> ${ride.DriverCompleted}<br>
+              <strong>Customer Completed:</strong> ${ride.CustomerCompleted}<br>
+              <strong>Payment Status:</strong> ${ride.PaymentStatus}<br>
+              <strong>Submitted Time:</strong> ${ride.SubmittedTime}<br>
+              <br>
+            `;
+            rideList.appendChild(liE);
+          });
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+
+    function fetchDataForDecline(ch){
+      const rideId = document.getElementById(`${action}RideId`).value;
+
+      fetch(`/DFetchS?rideId=${rideId}`)
+        .then(response => response.json())
+        .then(data => {
+          const rideList = document.getElementById('rideList');
+          rideList.innerHTML = '';
+          data.forEach(ride => {
+            const liS = document.createElement('li');
+            liS.innerHTML = `
+              <strong>Driver ID:</strong> ${ride.DriverID}<br>
+              <strong>Customer ID:</strong> ${ride.CustomerID}<br>
+              <strong>Ride ID:</strong> ${ride.RideID}<br>
+              <strong>Driver Confirmation:</strong> ${ride.DriverConfirmation}<br>
+              <strong>CustomerConfirmation:</strong> ${ride.CustomerConfirmation}<br>
+              <strong>Submitted Time:</strong> ${ride.SubmittedTime}<br>
+              <br>
+            `;
+            rideList.appendChild(liS);
+          });
+        })
+        .catch(error => console.error('Error:', error));
+
+        fetch(`/FetchN?rideId=${rideId}`)
+        .then(response => response.json())
+        .then(data => {
+          const rideList = document.getElementById('rideList');
+          rideList.innerHTML = '';
+          data.forEach(ride => {
+            const liN = document.createElement('li');
+            liN.innerHTML = `
+              <strong>Driver ID:</strong> ${ride.DriverID}<br>
+              <strong>Customer ID:</strong> ${ride.CustomerID}<br>
+              <strong>Ride ID:</strong> ${ride.RideID}<br>
+              <strong>Driver Confirmation:</strong> ${ride.DriverConfirmation}<br>
+              <strong>Customer Confirmation:</strong> ${ride.CustomerConfirmation}<br>
+              <strong>Submitted Time:</strong> ${ride.SubmittedTime}<br>
+              <br>
+            `;
+            rideList.appendChild(liN);
+          });
+        })
+        .catch(error => console.error('Error:', error));
+
+        
+      fetch(`/FetchA?rideId=${rideId}`)
+      .then(response => response.json())
+      .then(data => {
+        const rideList = document.getElementById('rideList');
+        rideList.innerHTML = '';
+        data.forEach(ride => {
+          const liA = document.createElement('li');
+          liA.innerHTML = `
+            <strong>Driver ID:</strong> ${ride.DriverID}<br>
+            <strong>Customer ID:</strong> ${ride.CustomerID}<br>
+            <strong>Ride ID:</strong> ${ride.RideID}<br>
+            <strong>Departure ID:</strong> ${ride.DepartureID}<br>
+            <strong>From:</strong> ${ride.From}<br>
+            <strong>To:</strong> ${ride.To}<br>              
+            <strong>Approx Cost:</strong> ${ride.ApproxCost}<br>
+            <strong>Price Quotation:</strong> ${ride.PriceQuotation}<br>
+            <strong>Number of Seats:</strong> ${ride.NumberOfSeat}<br>
+            <strong>Submitted Time:</strong> ${ride.SubmittedTime}<br>
+            <strong>Pickup Location:</strong> ${ride.PickupLocation}<br>
+            <strong>Drop Location:</strong> ${ride.DropLocation}<br>
+            <br>
+          `;
+          rideList.appendChild(liA);
+        });
+      })
+      .catch(error => console.error('Error:', error));
+
+    }
+
+
+    //for paste button
+    function pasteRideId(action) {
+      navigator.clipboard.readText()
+        .then(text => {
+          document.getElementById(`${action}RideId`).value = text;
+        })
+        .catch(err => {
+          console.error('Failed to read clipboard contents: ', err);
+        });
+    }
+   
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.6.0/dist/web3.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js"></script>
+
+  <script>
+    
+        var userid;
+        var address;
+        window.addEventListener('load', async () => {
+
+            if (typeof window.ethereum !== 'undefined') {
+              window.web3 = new Web3(window.ethereum);
+              await window.ethereum.enable();
+            } else {
+              alert('Please install MetaMask to use this dApp.');
+            }
+
+            
+
+            try {
+              
+                // Send a POST request to the server
+                
+                fetch('/DFetchlogin')
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        // Do something with the data
+                        userid = data.DID;
+                        address = data.WAD;
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+          
+            } catch (error) {
+                console.error('Error:', error);
+            }
+            
+        });
+
+        // Handle form submission
+        document.getElementById('acceptForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevent form submission
+            
+            console.log("Pointer to detect error");
+
+            const rideId = document.getElementById(`acceptRideId`).value;
+
+            const message = "Driver with user ID: " + userid +" Accepted the ride for Ride ID: " + rideId; // Message to sign
+            const accountAddress = address; // Your Ethereum account address
+
+            try {
+              const signature = await window.web3.eth.personal.sign(message, accountAddress, '');
+              alert('Signature: ' + signature);
+              // If the signature is successful, submit the form
+              this.submit(); // 'this' refers to the form element
+            } catch (error) {
+              console.error(error);
+              alert('An error occurred. Please check the console.');
+            }
+          });
+
+        
+          // Handle form submission
+          document.getElementById('startForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            const rideId = document.getElementById(`startRideId`).value;
+
+            const message = "Driver with user ID: " + userid +" Started the ride for Ride ID: " + rideId; // Message to sign
+            const accountAddress = address; // Your Ethereum account address
+
+            try {
+              const signature = await window.web3.eth.personal.sign(message, accountAddress, '');
+              alert('Signature: ' + signature);
+              // If the signature is successful, submit the form
+              this.submit(); // 'this' refers to the form element
+            } catch (error) {
+              console.error(error);
+              alert('An error occurred. Please check the console.');
+            }
+        });
+
+        
+          // Handle form submission
+          document.getElementById('declineForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            const rideId = document.getElementById(`declineRideId`).value;
+
+            const message = "Driver with user ID: " + userid +" Declining the ride for Ride ID: " + rideId; // Message to sign
+            const accountAddress = address; // Your Ethereum account address
+
+            try {
+              const signature = await window.web3.eth.personal.sign(message, accountAddress, '');
+              alert('Signature: ' + signature);
+              // If the signature is successful, submit the form
+              this.submit(); // 'this' refers to the form element
+            } catch (error) {
+              console.error(error);
+              alert('An error occurred. Please check the console.');
+            }
+        });
+
+        
+          // Handle form submission
+          document.getElementById('completeForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            const rideId = document.getElementById(`completeRideId`).value;
+
+            const message = "Driver with user ID: " + userid +" Completed the ride for Ride ID: " + rideId; // Message to sign
+            const accountAddress = address; // Your Ethereum account address
+
+            try {
+              const signature = await window.web3.eth.personal.sign(message, accountAddress, '');
+              alert('Signature: ' + signature);
+              // If the signature is successful, submit the form
+              this.submit(); // 'this' refers to the form element
+            } catch (error) {
+              console.error(error);
+              alert('An error occurred. Please check the console.');
+            }
+        });
+
+  </script>
+
+</body>
+</html>

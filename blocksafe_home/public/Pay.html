@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pay Page</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to right, #A55EEA, #FF7675);
+      }
+  
+      .navbar {
+        overflow: hidden;
+        background: linear-gradient(to right, #FFA500, #4B0082);
+      }
+  
+      .navbar a {
+        float: left;
+        display: block;
+        color: rgb(0, 0, 0);
+        text-align: center;
+        padding: 14px 20px;
+        text-decoration: none;
+      }
+  
+      .navbar a:hover {
+        background-color: #ddd;
+        color: black;
+      }
+  
+      /* Adjust page content */
+      .content {
+        padding: 20px;
+      }
+  
+      h1 {
+        margin-bottom: 20px;
+      }
+      
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+      
+      input {
+        padding: 5px;
+        margin-bottom: 10px;
+      }
+      
+      h1 {
+        text-align: center;
+        color: #fff;
+        margin-bottom: 30px;
+      }
+      p {
+        text-align: center;
+      }
+      
+      form {
+        text-align: center;
+      }
+      
+      label {
+        display: block;
+        margin-bottom: 8px;
+        color: #fff;
+      }
+      
+      input[type="text"],
+      input[type="email"],
+      input[type="password"],
+      input[type="number"],
+      select {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        box-sizing: border-box;
+        background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+      }
+      
+      button {
+        width: calc(50% - 5px); /* Adjust button width */
+        padding: 12px 20px;
+        border: none;
+        border-radius: 5px;
+        background: linear-gradient(to right, #FFA500, #4B0082);
+        color: #fff;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+        margin-right: 10px; 
+        margin-bottom: 10px;/* Add space between buttons */
+      }
+      
+      /* button:last-child {
+        margin-right: 0; /* Remove margin from last button */
+      /* } */ 
+      
+      button:hover {
+        background: linear-gradient(to right, #9448ED, #FF6B6B);
+      }
+      input[type="submit"]{
+        width: calc(50% - 5px); /* Adjust button width */
+        padding: 12px 20px;
+        border: none;
+        border-radius: 5px;
+        background: linear-gradient(to right, #FFA500, #4B0082);
+        color: #fff;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+        margin-right: 10px; 
+        margin-bottom: 10px;/* Add space between buttons */
+      }
+    
+      input[type="submit"]:hover{
+        background: linear-gradient(to right, #9448ED, #FF6B6B);
+        }
+      .container:hover {
+        transform: translateY(-8px);
+      }
+      .card {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin: 5px;
+        padding: 10px;
+        background-color: #f9f9f9;
+        transition: transform 0.3s;
+      }
+      
+      .card-content {
+        text-align: left;
+      }
+      
+      .card:hover {
+        background-color: #f1f1f1;
+        transform: scale(1.05);
+      }
+    </style>
+</head>
+<body>
+
+    
+    <h1>Pay Page</h1>
+    <div id="paymentDetails"></div>
+
+    
+    <form id="myForm" style="display: block;">    
+      <input type="submit" value="Confirm">
+    </form>
+
+    <form id="transferForm" style="display: none;">    
+        <input type="submit" value="Transfer">
+      </form>
+    
+      <div id="txdata"></div>
+
+    
+<p id="status"></p>
+
+<script src="https://cdn.jsdelivr.net/npm/web3@1.6.0/dist/web3.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js"></script>
+
+<script>
+
+    // Function to get query parameter by name
+    function getQueryParam(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    }
+
+    // Get the amount and currency from the query parameters
+    const RideID = getQueryParam('RideID');
+    const Text = getQueryParam('IPFS');
+    const Sender = getQueryParam('walletC');
+    const Reciver = getQueryParam('walletD');
+    const Amount = getQueryParam('cost');
+
+    // Display the payment details on the page
+    const paymentDetailsElement = document.getElementById('paymentDetails');
+    paymentDetailsElement.innerHTML = `<p>RideID: ${RideID} <br>Text: ${Text} <br>Sender: ${Sender} <br>Reciver: ${Reciver} <br>Amount: ${Amount}</p>`;
+
+    function rupeesToEther(amountInRupees, exchangeRate) {
+        return amountInRupees / exchangeRate;
+    }
+    const exchangeRate = 100;
+
+    function ipfsHashToTxData(ipfsHash) {
+      const bytes = Buffer.from('1220' + ipfsHash.slice(2), 'hex');
+      return '0x' + bytes.toString('hex');
+  }
+    function txDataToIpfsHash(txData) {
+      const bytes = Buffer.from(txData.slice(2), 'hex');
+      return '0x' + bytes.slice(2).toString('hex');
+  }
+
+  //on loading website
+  
+  window.addEventListener('load', async () => {
+
+    if (typeof window.ethereum !== 'undefined') {
+      window.web3 = new Web3(window.ethereum);
+      await window.ethereum.enable();
+    } else {
+      alert('Please install MetaMask to use this dApp.');
+    }
+
+  });
+
+
+  // Handle form submission
+  document.getElementById('myForm').addEventListener('submit', async function(event) {
+    event.preventDefault(); // Prevent form submission
+    const message = "customer signatured for IPFS : " + Text.trim(); // Message to sign
+    const accountAddress = Sender; // Your Ethereum account address
+
+    try {
+      const signature = await window.web3.eth.personal.sign(message, accountAddress, '');
+      alert('Signature: ' + signature);
+    } catch (error) {
+      console.error(error);
+      alert('An error occurred. Please check the console.');
+    }
+
+    const formTransfer = document.getElementById('transferForm');
+    formTransfer.style.display = 'block';
+
+    const form = document.getElementById('myForm');
+    form.style.display = 'none';
+
+  });
+
+  document.getElementById('transferForm').addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const from = Sender;
+    const to = Reciver;
+
+    const vari = rupeesToEther(Amount, exchangeRate);
+    const amount = vari.toString();
+    //const data = ipfsHashToTxData(Text);
+    const data = "0x0001";
+    //const paymentDetailsElement = document.getElementById('txdata');
+    //paymentDetailsElement.innerHTML = `<p>${Text} <br>${data} <br>${amount}</p>`;
+
+    if (!from || !to || !amount || !data) {
+      alert('Please fill in all fields.');
+      return;
+    }
+
+    try {
+      const accounts = await window.web3.eth.getAccounts();
+      const tx = await window.web3.eth.sendTransaction({
+        from: accounts[0],
+        to: to,
+        value: window.web3.utils.toWei(amount, 'ether'),
+        data: data,
+      });
+      document.getElementById('status').innerText = `Transaction successful. TxHash: ${tx.transactionHash}`;
+        
+        ////////////////////////////////////
+        fetch(`/UpdatePayment?rideId=${RideID}`)
+          .then(response => response.json())
+          .then(data => {
+            console.log("payment updated");
+          })
+          .catch(error => console.error('Error:', error));
+      
+        
+        /////////////////////////////////////////
+
+    } catch (error) {
+      document.getElementById('status').innerText = `Transaction failed: ${error.message}`;
+    }
+
+  });
+</script>
+
+</body>
+</html>
+

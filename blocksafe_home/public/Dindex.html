@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navigation Bar</title>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BlockSafe - Secure Carpooling</title>
+<style>
+ * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #A55EEA, #FF7675); /* Gradient background */
+  color: #fff;
+}
+
+.nav {
+  background: linear-gradient(to right, #A55EEA, #FF7675); /* Gradient background */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.logo {
+  color: #fff;
+  text-decoration: none;
+  font-size: 20px;
+  margin-left: 20px;
+}
+
+.nav-links {
+  list-style: none;
+  margin-right: 20px;
+}
+
+.nav-links li {
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.nav-links li a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+  color: #ccc;
+}
+
+.background-image {
+  background-image: url('back.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 600px;
+  display: flex;
+  /* justify-content: center;
+  align-items: center; */
+  color: #fff;
+  text-align: center;
+} 
+
+.background-image h1 {
+  color: #fff;
+  font-size: 36px;
+}
+h1{
+  margin-top: 90px;
+  text-align: center;
+  align-items: center;
+  margin-left: 15%;
+}
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 20px; /* Adjust spacing */
+}
+
+.card {
+  width: 200px;
+  background: linear-gradient(to right, #FFA500, #4B0082); /* Gradient background */
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card img {
+  width: 100%;
+  height: 150px; /* Adjust height as needed */
+  object-fit: cover;
+}
+
+.card p {
+  text-align: center;
+  color: #fff;
+  font-size: 18px;
+  padding: 10px 0;
+}
+
+.footer {
+  background: linear-gradient(to right, #A55EEA, #FF7675); /* Same gradient as the webpage */
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+}
+</style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="#" class="logo">BlockSafe</a>
+    <ul class="nav-links">
+        <li><a href="/Dpage">Home</a></li>
+        <li><a href="/Drequest_ride">Create Request</a></li>
+        <li><a href="/Dride_requests">Ride Requests</a></li>
+        <li><a href="/Dhistory">Rides</a></li>
+        <li><a href="/Dch_ride_st">Change ride status</a></li>
+        <li><a href="/Dsupport">Support</a></li>
+        <li><a href="/Dlogout">Logout</a></li>
+    </ul>
+</nav>
+
+
+<br>
+<br>
+<br>
+<!-- <h2>User Data:</h2>
+    <p id="userData"></p> -->
+    
+<div class="background-image">
+    <h1>We make your journey safe, secure and connected </h1>
+</div>
+
+<div class="card-container">
+    <div class="card">
+        <img src="security-in-car-pooling-using-blockchain--the-image-shoud-be-combination-of-purple-and-orange.jpg" alt="Security">
+        <p>Security</p>
+    </div>
+    <div class="card">
+        <img src="safety-in-car-pooling-using-blockchain--the-image-shoud-be-combination-of-purple-and-orange.jpg" alt="Safety">
+        <p>Safety</p>
+    </div>
+    <div class="card">
+        <img src="privacy-in-car-pooling-using-blockchain--the-image-shoud-be-combination-of-purple-and-orange.jpg" alt="Privacy">
+        <p>Privacy</p>
+    </div>
+    <div class="card">
+        <img src="decentralization-in-car-pooling-using-blockchain--the-image-shoud-be-combination-of-purple-and-orange.jpg" alt="Decentralization">
+        <p>Decentralization</p>
+    </div>
+</div>
+
+<footer class="footer">
+    <p>&copy; 2024 BlockSafe. All rights reserved.</p>
+</footer>
+</body>
+</html>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+  //  // Parse the query parameters from the URL
+  //  const queryString = window.location.search;
+   // const urlParams = new URLSearchParams(queryString);
+
+  //  // Get the user ID and address from the query parameters
+  //  const userId = urlParams.get('userId');
+  //  const address = urlParams.get('address');
+
+  //  // Display the user data on the page
+  //  document.getElementById('userData').innerText = `User ID: ${userId}\nMetaMaskAddress: ${address}`;
+
+  //  // Store the user data in localStorage
+  //  localStorage.setItem('userId', userId);
+  //  localStorage.setItem('address', address);
+
+  //  // Send the user data to the server
+  //  const data = { userId, address };
+  //  fetch('/DuserData', {
+  //      method: 'POST',
+  //      headers: {
+  //          'Content-Type': 'application/json'
+  //      },
+  //      body: JSON.stringify(data)
+  //  });
+////////////////////////////////////////////////////////////////////////////////
+
+      const textdata = [
+          "Secure Car Pooling Powered by Blockchain",
+          "Join Now!"
+      ];
+      
+      let index = 0;
+      let letterIndex = 0;
+      let typingTextElement = document.getElementById("typingText");
+      
+      function type() {
+          if (index < textdata.length) {
+              let currentText = textdata[index];
+              typingTextElement.innerHTML = currentText.slice(0, letterIndex + 1);
+              letterIndex++;
+      
+              if (letterIndex <= currentText.length) {
+                  setTimeout(type, 100); // Typing speed
+              } else {
+                  setTimeout(clearText, 2000); // Wait for 2 seconds before clearing
+              }
+          } else {
+              index = 0;
+              setTimeout(type, 100); // Repeat typing animation
+          }
+      }
+      
+      function clearText() {
+          let currentText = textdata[index];
+          if (letterIndex >= 0) {
+              typingTextElement.innerHTML = currentText.slice(0, letterIndex);
+              letterIndex--;
+              setTimeout(clearText, 100); // Deleting speed
+          } else {
+              index++;
+              letterIndex = 0;
+              setTimeout(type, 1000); // Wait for 1 second before typing next line
+          }
+      }
+      
+      type(); // Start typing animation
+  });
+  
+  </script>
+  
+  <!-- <script>
+    // Parse the query parameters from the URL
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    
+    // Get the user ID and address from the query parameters
+    const userId = urlParams.get('userId');
+    const address = urlParams.get('address');
+
+    // Display the user data on the page
+    document.getElementById('userData').innerText = `User ID: ${userId}\nMetaMaskAddress: ${address}`;
+
+    // Send the user data to the server
+    const data = { userId, address };
+    fetch('/DuserData', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+</script> -->
+</body>
+</html>

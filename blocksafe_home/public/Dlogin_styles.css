@@ -1,0 +1,78 @@
+
+
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #A55EEA, #FF7675);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.login-card {
+  background: linear-gradient(to right, #FFA500, #4B0082);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.login-card:hover {
+  transform: translateY(-5px);
+}
+
+h1 {
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  color: #fff;
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+button {
+  width: calc(50% - 5px); /* Adjust button width */
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  background: linear-gradient(to right, #A55EEA, #FF7675);
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  margin-right: 10px; 
+  margin-bottom: 10px;/* Add space between buttons */
+}
+
+/* button:last-child {
+  margin-right: 0; /* Remove margin from last button */
+/* } */ 
+
+button:hover {
+  background: linear-gradient(to right, #9448ED, #FF6B6B);
+}
+
+button:hover {
+  background-color: #ccc;
+}
