@@ -8,45 +8,6 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
   // Get userId and walletAddress from input fields
   const userId = document.getElementById('userId').value;
   const walletAddress = document.getElementById('walletAddress').value;
-
-  try {
-      // Send a POST request to the server
-      const response = await fetch('/Dlogin', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ userId, walletAddress })
-      });
-
-      // Parse the JSON response
-      const Ddata = await response.json();
-      
-      console.log('data is available');
-
-      // Check if the request was successful
-      if (response.ok) {
-          // Extract walletAddress from the response data
-          const walletAddress = Ddata.walletAddress;
-
-          // Use the walletAddress as needed
-          console.log('Wallet Address:', walletAddress);
-/////////////////for testing///////////////////////////////////////
-          // window.location.href = "Dindex.html";
-/////////////////for testing///////////////////////////////////////
-          // Call signAndSaveMessage function with walletAddress
-          signAndSaveMessage(walletAddress);
-         
-      } else {
-          // Display error message
-          alert(Ddata.message);
-      }
-  } catch (error) {
-      console.error('Error:', error);
-  }
-});
-
-
 const contractAddress = '0xCeD8E5d96da547Cb4C9f49C83159f128e4364484';
         const contractABI = [
             {
@@ -96,6 +57,45 @@ const contractAddress = '0xCeD8E5d96da547Cb4C9f49C83159f128e4364484';
                 alert(`Error signing and saving message for ${name}: ${error.message}`);
             }
         }
+
+  try {
+      // Send a POST request to the server
+      const response = await fetch('/Dlogin', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ userId, walletAddress })
+      });
+
+      // Parse the JSON response
+      const Ddata = await response.json();
+      
+      console.log('data is available');
+
+      // Check if the request was successful
+      if (response.ok) {
+          // Extract walletAddress from the response data
+          const walletAddress = Ddata.walletAddress;
+
+          // Use the walletAddress as needed
+          console.log('Wallet Address:', walletAddress);
+/////////////////for testing///////////////////////////////////////
+          // window.location.href = "Dindex.html";
+/////////////////for testing///////////////////////////////////////
+          // Call signAndSaveMessage function with walletAddress
+          signAndSaveMessage(walletAddress);
+         
+      } else {
+          // Display error message
+          alert(Ddata.message);
+      }
+  } catch (error) {
+      console.error('Error:', error);
+  }
+});
+
+
 
 // Function to login to the dashboard
 
